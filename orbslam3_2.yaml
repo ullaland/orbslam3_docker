@@ -1,0 +1,29 @@
+services:
+  orbslam:
+    image: jahaniam/orbslam3:ubuntu18_melodic_cuda
+    tty: true
+    volumes:
+      - '/tmp/.X11-unix:/tmp/.X11-unix:rw'
+      - '/tmp/.docker.xauth:/tmp/.docker.xauth:rw'
+      - '/home/$USER/Orbslam/Datasets:/Datasets'
+      - '/home/$USER/Orbslam/ORB_SLAM3:/ORB_SLAM3'
+    network_mode: "host"
+    privileged: true
+    environment:
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=/tmp/.docker.xauth
+      - CUDA_VISIBLE_DEVICES=1
+    deploy:
+      resources:
+        reservations:
+          devices:
+          - driver: nvidia
+            device_ids: ["0"]
+            capabilities: [gpu, compute, utility, display]
+    command: bash 
+    # -c " cd /ORB_SLAM3 
+    #                    && ./build.sh 
+    #                    && echo 'ROS_PACKAGE_PATH=/opt/ros/melodic/share:/ORB_SLAM3/Examples/ROS'>>~/.bashrc
+    #                    && source ~/.bashrc
+    #                    && cd /ORB_SLAM3 && chmod +x build_ros.sh && ./build_ros.sh"

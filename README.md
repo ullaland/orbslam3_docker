@@ -21,11 +21,11 @@ Steps to compile the Orbslam3 on the sample dataset:
 
 Now you should see ORB_SLAM3 is compiling. 
 To run a test example:
-- `docker exec -it orbslam3 bash`
+- `docker exec -it orbslam3_2 bash`
 - `cd /ORB_SLAM3/Examples&&./euroc_examples.sh`
 
 ---
 
 You can use vscode remote development (recommended) or sublime to change codes.
-- `docker exec -it orbslam3 bash`
+- `docker exec -it orbslam3_2 bash`
 - `subl /ORB_SLAM3`
